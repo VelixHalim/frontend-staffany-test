@@ -1,4 +1,3 @@
-import moment from "moment";
 import { getAxiosInstance } from ".";
 
 export const getShifts = async (daystart:string,dayend:string) => {
@@ -28,6 +27,5 @@ export const updateShiftById = async (id: string, payload: any) => {
 export const deleteShiftById = async (id: string, startDate:string, endDate:string) => {
   const api = getAxiosInstance()
   const { data } = await api.delete(`/shifts/${id}?startDate=${startDate}&endDate=${endDate}`);
-  console.log(data)
   return data;
 };

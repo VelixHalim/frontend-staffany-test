@@ -111,7 +111,7 @@ const Shift = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   
-  //getdata publish
+  //declare getdata publish
   const [isLoadingPublish, setIsLoadingPublish] = useState(false)
   const [updateData, setUpdateData] = useState(false)
   const [publish, setPublish] = useState([])
@@ -120,7 +120,8 @@ const Shift = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
-  // for date
+  
+  // for date get current week
   let d =day.getDay()
   let start = day.getDate() - d+(d==0?-6:1)
   let end = start+6
@@ -129,6 +130,7 @@ const Shift = () => {
 
   const [startDate,setStartDate] = useState(moment(monday).format('YYYY-MM-DD'))
   const [endDate,setEndDate]=useState(moment(sunday).format('YYYY-MM-DD'))
+  
   // for publish
   const [publishText,setPublishText] = useState("")
   
@@ -142,7 +144,7 @@ const Shift = () => {
     setSelectedId(null);
     setShowDeleteConfirm(false);
   }; 
-
+  //prev week
   const leftArrowClick=()=>{
     let monday = new Date(startDate)
     monday.setDate(monday.getDate()-7)
@@ -154,6 +156,7 @@ const Shift = () => {
     let prevsunday = moment(sunday).format("YYYY-MM-DD")
     setEndDate(prevsunday)
   }
+  //next week
   const rightArrowClick=()=>{
     let monday = new Date(startDate)
     monday.setDate(monday.getDate()+7)
@@ -261,11 +264,12 @@ const Shift = () => {
       onCloseDeleteDialog();
     }
   };
-
+  // check there is data or not
   let anyData = false
   if(rows.length===0){
     anyData = true
   }
+  // check in the week publish or not
   let isPublish = false
   if(publish.length!==0){
     isPublish =true
@@ -350,8 +354,6 @@ const Shift = () => {
                 Publish
               </Button>
             </CardContent>
-            {/* <Button className="" onClick={()=>addshifts()}>Add Shifts</Button> */}
-            {/* <Button className="" onClick={(e)=>publish(e)}>Publish</Button> */}
             <DataTable
               title="Shifts"
               columns={columns}
